@@ -1,0 +1,3 @@
+C:\Users\nosta\Projects\uln-generator\api\bin\Debug\net5.0\api.exe
+C:\Users\nosta\Projects\uln-generator\api\bin\Debug\net5.0\api.dll
+C:\Users\nosta\Projects\uln-generator\api\bin\Debug\net5.0\api.Views.dll
