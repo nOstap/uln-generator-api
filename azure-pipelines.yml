@@ -1,3 +1,10 @@
+resources:
+  repositories:
+  - repository: uln-generator
+    type: github
+    name: nOstap/uln-generator
+    endpoint: nOstap
+
 trigger:
 - main
 
@@ -11,6 +18,28 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- checkout: uln-generator
+
+- task: NodeTool@0
+  inputs:
+    versionSpec: '14.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install -g @angular/cli
+    npm install
+    ng build --prod
+  displayName: 'npm install and build'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)/www'
+    Contents: |
+      *
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- checkout: self
+
 - task: DotNetCoreCLI@2
   inputs:
     command: publish
